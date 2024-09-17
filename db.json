@@ -1,0 +1,30 @@
+{
+  "tasks": [
+    {
+      "id": "64c404f4",
+      "text": "Don't spread wrong info",
+      "dateTime": "2024-09-28",
+      "reminder": false
+    },
+    {
+      "id": "122652b5",
+      "text": "Running hills",
+      "dateTime": "2024-09-20",
+      "reminder": true
+    }
+  ],
+  "users": [
+    {
+      "id": "234",
+      "name": "Akpan Ette",
+      "email": "akpanette@gmail.com",
+      "address": "Udo ette close off nwaniba road uyo",
+      "profile_image": "@/images/logo.png"
+    },
+    {
+      "id": "235",
+      "name": "Udoh Akan",
+      "email": "udohakan@gmail.com"
+    }
+  ]
+}
