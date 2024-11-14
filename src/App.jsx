@@ -2,19 +2,21 @@
 //import Storage from './store'
 //import {BrowserRouter as link, router} from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 // logo assets
-import lanexLogo from './assets/Lanex_logo.png'
 
 // components
 import Header from './components/Header'
+import Tittle from './components/Tittle'
 import Tasks from './components/Tasks'
 import AddTask from './components/AddTask'
-
 
 function App() {
   const [showAddTask, setShowAddTask] = useState(false)
   const [tasks, setTask]= useState([])
+  const [modal, setModal] = useState(true);
+  const [edit, setEdit] = useState(false);
   const host = 'http://localhost:5000/tasks';
 
   // fetch API
@@ -29,7 +31,8 @@ function App() {
     const res = await fetch( id? `${host}/${id}?`: `${host}?_sort=dateTime`)
     return await res.json()
   }
-  // Update API
+
+  // Update task API
   const updateTask = async (id, data)=>{
     const res = await fetch(`${host}/${id}`,
       {
@@ -46,7 +49,7 @@ function App() {
     
   }
 
-  //delete task
+  //delete task API
   const deletTask = async (id) => {
     await fetch(`${host}/${id}`,{
       method:"DELETE",
@@ -63,42 +66,59 @@ function App() {
     task.reminder = !task.reminder
     return await updateTask(id,task)
   }
+
+  const editTask = async(newTask)=>{
+    const taskToEdit = await fetchTasks(newTask.id);
+    const task= await taskToEdit[0] ? taskToEdit[0]: taskToEdit
+    task.reminder = newTask.reminder
+    task.text = newTask.text
+    task.dateTime = newTask.dateTime
+    return await updateTask(newTask.id,task)
+  }
   const addTask = async (newTask)=>{
-    let id = Math.floor(Math.random() * 0xfff * 1000000).toString(16);
-    newTask.id = id;
-    const res = await fetch( host, 
-      {
-        method:'POST',
-        header:{
-          "accept":"*/*",
-          "User-Agent": "lanex (http://localhost:5173)",
-          'content-type':'application/json'
-        },
-        body:JSON.stringify(newTask)
-      }
-    )
-    const data = await res.json()
-    getTasks()
-    //setTask([ ...tasks, data ])
-    setShowAddTask(false)
+    if (newTask.text == ''){
+      alert("Text field can't be empty!")
+    }else{
+      newTask.id = Math.floor(Math.random() * 0xfff * 1000000).toString(16);
+      const res = await fetch( host, 
+        {
+          method:'POST',
+          header:{
+            "accept":"*/*",
+            "User-Agent": "lanex (http://localhost:5173)",
+            'content-type':'application/json'
+          },
+          body:JSON.stringify(newTask)
+        }
+      )
+      const data = await res.json()
+      getTasks()
+      //setTask([ ...tasks, data ])
+      setShowAddTask(false)
+    }
+    
   }
   
 
   return (
-    <div className='container'>
-      <Header title='Task Tracker' 
-      showAddTask={showAddTask}
-      setShowAddTask={setShowAddTask}
-      />
-      {showAddTask&&<AddTask onAddTask = {addTask}/>}
-      <div className='tasks'>
-          <Tasks tasks={tasks} 
-          onDelete={deletTask} 
-          onToggle={toggleRiminder}
-          />
+    <div className="body">
+      <Header/>
+      <div className='container'>
+        <Tittle title='Task Tracker' 
+        showAddTask={showAddTask}
+        setShowAddTask={setShowAddTask}
+        />
+        {showAddTask&&<AddTask onAddTask = {addTask}/>}
+        <div className='tasks'>
+            <Tasks tasks={tasks} 
+            onDelete={deletTask} 
+            onToggle={toggleRiminder}
+            onEditTask={editTask}
+            />
+        </div> 
+        { (tasks.length === 0) &&<h2>NO Task to show</h2>}
+             
       </div>
-      {/* <link to='about' component={About}></link> */}
-      
     </div>
   )
 }

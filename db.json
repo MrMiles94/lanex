@@ -1,15 +1,21 @@
 {
   "tasks": [
     {
-      "id": "64c404f4",
-      "text": "Don't spread wrong info",
-      "dateTime": "2024-09-28",
-      "reminder": false
+      "id": "90b41371",
+      "text": "Running  with me all tight",
+      "dateTime": "2024-11-30",
+      "reminder": true
     },
     {
-      "id": "122652b5",
-      "text": "Running hills",
-      "dateTime": "2024-09-20",
+      "id": "78c475ba",
+      "text": "runiinnjvbm to the top",
+      "dateTime": "2024-09-01",
+      "reminder": true
+    },
+    {
+      "id": "44d244d0",
+      "text": "runiinnjvbm. holl",
+      "dateTime": "2024-11-16",
       "reminder": true
     }
   ],
@@ -24,7 +30,9 @@
     {
       "id": "235",
       "name": "Udoh Akan",
-      "email": "udohakan@gmail.com"
+      "email": "udohakan@gmail.com",
+      "address": "Udo ette close off nwaniba road uyo",
+      "profile_image": "@/assets/Lanex_logo.png"
     }
   ]
 }

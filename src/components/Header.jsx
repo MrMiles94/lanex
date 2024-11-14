@@ -1,17 +1,8 @@
-import Button from "./Button"
 
-function Header({title, showAddTask, setShowAddTask}){
-    const click = ()=>{
-        setShowAddTask(!showAddTask)
-    }
+export default function Header (){
     return (
-        <header className="header flex-row">
-        <h1>{title}</h1>
-        <Button onClick={click} text={showAddTask ? 'Close': 'Add Task'} 
-        color={showAddTask ? 'red': 'black'}
-        />
-        </header>
+        <nav className="nav-bar flex-row just-space-between">
+            <h2>Task Tracker</h2><div className="circle"></div>
+        </nav>
     )
 }
-
-export default Header

@@ -1,14 +1,29 @@
 
-import { FaTimes, FaTrash, FaEdit, FaEllipsisV, FaExpeditedssl} from "react-icons/fa";
+import { FaEllipsisV} from "react-icons/fa";
 import {useState} from 'react'
 
-const Task = ({task, onDelete, onToggle}) =>{
+import Modal from './Modal'
+
+const Task = ({task, onDelete, onToggle, fixTask}) =>{
 
   const [taskOption, SetTaskOptions] = useState(false)
-
+  const [modal, setModal] = useState(true);
+  const [edit, setEdit] = useState(false);
+    const toggleEdit=()=>{
+        setEdit(true)
+        setModal( false)
+    }
   const delet =()=> {
     onDelete(task.id)
     SetTaskOptions(false)
+}
+const editTask = (newTask) =>{
+    fixTask(newTask)
+    setModal( true)
+    setEdit(false)
+}
+const toggleModal =()=>{
+    setModal(!modal)
 }
 
     const day = new Date()
@@ -34,12 +49,16 @@ const Task = ({task, onDelete, onToggle}) =>{
             </p>
         </div>
         <div className="options">
-            { !taskOption && <FaEllipsisV onClick={()=>SetTaskOptions(true)}/> }
-            { taskOption && <div className="trying box">
-            <FaTrash className="option" style={{color:'black'}} onClick={delet}/>
-            <FaEdit className="option" style={{color:'green'}} onClick={()=>SetTaskOptions(false)}/>
-            </div>}
+            <FaEllipsisV onClick={toggleModal}/>
+            
         </div>
+        <Modal modal={modal} edit={edit} 
+        onToggleModal={toggleModal} 
+        onDeleteTask={delet}
+        onEditTask={toggleEdit}
+        task={task}
+        editTask={editTask}
+        />
             
     </div>)
     )

@@ -17,12 +17,12 @@
   justify-content: space-between;
   border: 5px solid white;
 }
-.header>button{
+.header>button {
   margin-left: auto;
   float: right;
 }
 
-.task.reminder{
+.task.reminder {
   border-left: 5px solid green;
   border-radius: 10px;
 

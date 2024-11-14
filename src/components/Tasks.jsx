@@ -1,6 +1,6 @@
 import Task from './SingleTask'
 
-const Tasks = ({tasks, onDelete, onToggle}) => {
+const Tasks = ({tasks, onDelete, onToggle, onEditTask}) => {
     
     return (
         <>
@@ -10,7 +10,9 @@ const Tasks = ({tasks, onDelete, onToggle}) => {
                     <Task task={task}
                     key={task.id}
                     onDelete={onDelete} 
-                    onToggle={onToggle}/>
+                    onToggle={onToggle}
+                    fixTask={onEditTask}/>
+                    
                 )
             )}
         </>
