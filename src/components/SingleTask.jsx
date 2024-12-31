@@ -24,6 +24,7 @@ const editTask = (newTask) =>{
 }
 const toggleModal =()=>{
     setModal(!modal)
+    setEdit(false)
 }
 
     const day = new Date()

@@ -12,14 +12,15 @@ export default function Modal ({
             <div className="cancel" onClick={onToggleModal}></div>
             <div className={ (edit) ? "modal flex-col align-center edit" : "modal flex-col align-center option"}>
                 <button onClick={onToggleModal}></button>
-                { !edit && <div className="modal-box">
-                    <button onClick={onEditTask} className=" btn btn-block-left"> <FaEdit/>  Edit</button>
-                    <button onClick={onDeleteTask} className="btn btn-block-left delete"> <FaTrash/> Delete</button>
-                </div>}
-                {edit && <>
-                    <EditText task={task} editTask={editTask}/>
-                    </>}
-
+                { !edit ? 
+                    <div className="modal-box">
+                        <button onClick={onEditTask} className=" btn btn-block-left"> <FaEdit/>  Edit</button>
+                        <button onClick={onDeleteTask} className="btn btn-block-left delete"> <FaTrash/> Delete</button>
+                    </div>: 
+                    <>
+                        <EditText task={task} editTask={editTask}/>
+                    </>
+                }
             </div>
         </div> }
         </>

@@ -103,7 +103,8 @@ function App() {
   return (
     <div className="body">
       <Header/>
-      <div className='container'>
+      <div className='container-fluid'>
+        <div className="container">
         <Tittle title='Task Tracker' 
         showAddTask={showAddTask}
         setShowAddTask={setShowAddTask}
@@ -117,6 +118,8 @@ function App() {
             />
         </div> 
         { (tasks.length === 0) &&<h2>NO Task to show</h2>}
+        </div>
+        
              
       </div>
     </div>

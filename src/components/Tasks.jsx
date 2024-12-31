@@ -1,4 +1,4 @@
-import Task from './SingleTask'
+import Task from './SingleTask';
 
 const Tasks = ({tasks, onDelete, onToggle, onEditTask}) => {
     
@@ -6,17 +6,16 @@ const Tasks = ({tasks, onDelete, onToggle, onEditTask}) => {
         <>
             {tasks.map(
                 (task)=>(
-                    
-                    <Task task={task}
-                    key={task.id}
-                    onDelete={onDelete} 
-                    onToggle={onToggle}
-                    fixTask={onEditTask}/>
-                    
+                    <Task 
+                        task={task}
+                        key={task.id}
+                        onDelete={onDelete} 
+                        onToggle={onToggle}
+                        fixTask={onEditTask}
+                    />
                 )
             )}
         </>
     )
-}
-
-export default Tasks
+};
+export default Tasks;

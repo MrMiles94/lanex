@@ -6,7 +6,7 @@ function Tittle({title, showAddTask, setShowAddTask}){
     }
     return (
         <header className="header flex-row">
-        <span>Name <b>||</b> name@email.com knsdlkmsdsm</span>
+        <span>Name <b>||</b> name@email.com</span>
         <Button onClick={click} text={showAddTask ? 'Close': 'Add Task'} 
         color={showAddTask ? 'red': 'black'}
         />
