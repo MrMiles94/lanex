@@ -4,7 +4,7 @@ const Tasks = ({tasks, onDelete, onToggle, onEditTask}) => {
     
     return (
         <>
-            {tasks.map(
+            {(tasks)? tasks.map(
                 (task)=>(
                     <Task 
                         task={task}
@@ -14,7 +14,7 @@ const Tasks = ({tasks, onDelete, onToggle, onEditTask}) => {
                         fixTask={onEditTask}
                     />
                 )
-            )}
+            ): <div>Nothing to display!</div>}
         </>
     )
 };

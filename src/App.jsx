@@ -2,15 +2,16 @@
 //import Storage from './store'
 //import {BrowserRouter as link, router} from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { BrowserRouter, Routes, Route} from 'react-router-dom'
 
 // logo assets
 
 // components
 import Header from './components/Header'
-import Tittle from './components/Tittle'
-import Tasks from './components/Tasks'
-import AddTask from './components/AddTask'
+
+//views 
+import Home from './views/index'
+import Archive from './views/Archive'
 
 function App() {
   const [showAddTask, setShowAddTask] = useState(false)
@@ -44,9 +45,6 @@ function App() {
       }
     )
     getTasks()
-    return await res.json()
-    
-    
   }
 
   //delete task API
@@ -98,31 +96,51 @@ function App() {
     }
     
   }
-  
 
+  //filter date for archive
+    const taskExpired=(date)=>{
+    const day = new Date();
+    const today =new Date(day.getFullYear(), day.getMonth(), day.getDate())
+    const taskDates = new Date(date)
+    return (today > taskDates)
+}
+  
   return (
+    
+    <BrowserRouter>
     <div className="body">
       <Header/>
-      <div className='container-fluid'>
-        <div className="container">
-        <Tittle title='Task Tracker' 
-        showAddTask={showAddTask}
-        setShowAddTask={setShowAddTask}
-        />
-        {showAddTask&&<AddTask onAddTask = {addTask}/>}
-        <div className='tasks'>
-            <Tasks tasks={tasks} 
-            onDelete={deletTask} 
-            onToggle={toggleRiminder}
-            onEditTask={editTask}
+      <Routes>
+        <Route path="/" element={
+          <>
+           <Home 
+            tasks={tasks.filter((task)=>(!taskExpired(task.dateTime)))}
+            showAddTask ={showAddTask} 
+            setShowAddTask={setShowAddTask} 
+            addTask={addTask}
+            deletTask={deletTask}
+            toggleRiminder={toggleRiminder}
+            editTask={editTask}
+            modal={modal}
+            edit={edit}
             />
-        </div> 
-        { (tasks.length === 0) &&<h2>NO Task to show</h2>}
-        </div>
-        
-             
-      </div>
+          </>
+        }/>
+        <Route path="/archive" element={<Archive
+          tasks={tasks.filter((task)=>(taskExpired(task.dateTime)))}
+          showAddTask ={showAddTask} 
+          setShowAddTask={setShowAddTask} 
+          addTask={addTask}
+          deletTask={deletTask}
+          toggleRiminder={toggleRiminder}
+          editTask={editTask}
+          modal={modal}
+          edit={edit}
+        />} />
+      </Routes>
+      
     </div>
+    </BrowserRouter>
   )
 }
 

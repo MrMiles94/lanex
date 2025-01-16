@@ -36,7 +36,8 @@ const toggleModal =()=>{
     const today = new Date()
     
     return(
-    (!((task.text=="")||(task.text==null))&&<div className={(task.reminder) ? "reminder task":"task"}
+    (!((task.text=="")||(task.text==null))&&
+    <div className={(task.reminder) ? "reminder task":"task"}
         onDoubleClick={()=>onToggle(task.id)}
     >
         <div className="text">
